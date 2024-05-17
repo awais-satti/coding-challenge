@@ -1,0 +1,118 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Employee {
+  _id: ID!
+  name: String!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Customer {
+  _id: ID!
+  name: String!
+  email: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type LineItem {
+  _id: ID!
+  productName: String!
+  quantity: Int!
+  price: Float!
+  total: Float
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Order {
+  _id: ID!
+  state: String!
+  assassignedLineItems: [LineItem!]
+  assignedCustomer: Customer!
+  assignedEmployee: Employee!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Query {
+  employees: [Employee!]!
+  employee(_id: String!): Employee!
+  orders: [Order!]!
+  order(_id: String!): Order!
+  customers: [Customer!]!
+  customer(_id: String!): Customer!
+  lineItems: [LineItem!]!
+  lineItem(_id: String!): LineItem!
+}
+
+type Mutation {
+  createEmployee(createEmployeeInput: CreateEmployeeInput!): Employee!
+  updateEmployee(updateEmployeeInput: UpdateEmployeeInput!): Employee!
+  removeEmployee(_id: String!): Employee!
+  createOrder(createOrderInput: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  updateOrderState(orderId: String!, newState: String!, employeeId: String, lineItemIds: [String]): Order!
+  removeOrder(_id: String!): Order!
+  createCustomer(createCustomerInput: CreateCustomerInput!): Customer!
+  updateCustomer(updateCustomerInput: UpdateCustomerInput!): Customer!
+  removeCustomer(_id: String!): Customer!
+  createLineItem(createLineItemInput: CreateLineItemInput!): LineItem!
+  updateLineItem(updateLineItemInput: UpdateLineItemInput!): LineItem!
+  removeLineItem(_id: String!): LineItem!
+}
+
+input CreateEmployeeInput {
+  name: String!
+  email: String!
+}
+
+input UpdateEmployeeInput {
+  name: String
+  email: String
+  _id: ID!
+}
+
+input CreateOrderInput {
+  state: String!
+  assignedCustomerId: String!
+}
+
+input UpdateOrderInput {
+  state: String
+  assignedCustomerId: String
+  id: Int!
+}
+
+input CreateCustomerInput {
+  name: String!
+  email: String!
+}
+
+input UpdateCustomerInput {
+  name: String
+  email: String
+  _id: ID!
+}
+
+input CreateLineItemInput {
+  productName: String!
+  quantity: Int!
+  price: Float!
+}
+
+input UpdateLineItemInput {
+  productName: String
+  quantity: Float
+  price: Float
+  _id: ID!
+  total: Float
+}
